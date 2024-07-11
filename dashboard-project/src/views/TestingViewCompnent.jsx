@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 import '../styles/HardwareUsageWidget.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const serversData = {
     'Server 1': {
@@ -58,7 +60,7 @@ const chartOptions = {
     }
 };
 
-const HardwareUsageWidget = () => {
+const TestingViewComponet = () => {
     const [selectedServer, setSelectedServer] = useState('Server 1');
     const data = serversData[selectedServer].resources;
 
@@ -129,4 +131,4 @@ const HardwareUsageWidget = () => {
     );
 };
 
-export default HardwareUsageWidget;
+export default TestingViewComponet;
