@@ -1,13 +1,27 @@
+
 // import logo from './logo.svg';
 import './App.css';
+// eslint-disable-next-line
 import HardwareUsageWidget from './views/HardwareUsageWidget';
+// eslint-disable-next-line
 import TestingViewComponet from './views/TestingViewCompnent';
-
+// eslint-disable-next-line
+import ResponseTimeWidget from './views/ResponseTimeWidget';
+// eslint-disable-next-line
+import CpuUtilizationWidget from './views/CpuUtilizationWidget';
+// eslint-disable-next-line
+import CostAnalysisWidget from './views/CostAnalysisWidget';
+// eslint-disable-next-line
+import SystemStateWidget from './views/SystemStateWidget';
 function App() {
   return (
     <div className="App">
-            <HardwareUsageWidget />
+            {/* <HardwareUsageWidget /> */}
             {/* <TestingViewComponet /> */}
+            {/* <ResponseTimeWidget/> */}
+            {/* <CpuUtilizationWidget/> */}
+            {/* <CostAnalysisWidget/> */}
+            <SystemStateWidget/>
         </div>
     // <div className="App">
     //   <header className="App-header">
