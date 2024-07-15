@@ -13,32 +13,58 @@ import CpuUtilizationWidget from './views/CpuUtilizationWidget';
 import CostAnalysisWidget from './views/CostAnalysisWidget';
 // eslint-disable-next-line
 import SystemStateWidget from './views/SystemStateWidget';
+// eslint-disable-next-line
+import RealTimeUtilizationWidget from './views/RealTimeUtilizationWidget';
+// eslint-disable-next-line
+import SystemLoadWidget from './views/SystemLoadWidget';
+// eslint-disable-next-line
+import DetailedCostAnalysisWidget from './views/DetailedCostAnalysisWidget';
+
+import { Container, Grid, Box, Typography } from '@mui/material';
+
 function App() {
   return (
-    <div className="App">
-            {/* <HardwareUsageWidget /> */}
-            {/* <TestingViewComponet /> */}
-            {/* <ResponseTimeWidget/> */}
-            {/* <CpuUtilizationWidget/> */}
-            {/* <CostAnalysisWidget/> */}
-            <SystemStateWidget/>
-        </div>
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+    <Container>
+    {/* Header */}
+    <Box sx={{ bgcolor: 'primary.main', color: 'white', p: 2, mb: 2 }}>
+      <Typography variant="h4">DashBoard Sample 1</Typography>
+    </Box>
+
+    {/* System Usage */}
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        System Usage
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={6}>
+          <HardwareUsageWidget />
+        </Grid>
+        <Grid item xs={12} md={6} sx={{ mt: 10 }}>
+          <SystemLoadWidget />
+        </Grid>
+      </Grid>
+    </Box>
+
+    {/* Real Time Utilization Widget */}
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        Real TimeUtilization 
+      </Typography>
+      <Box sx={{ border: '1px solid black', p: 2 }}>
+        <RealTimeUtilizationWidget />
+      </Box>
+    </Box>
+
+    {/* Detailed Cost Analysis Widget */}
+    <Box sx={{ mb: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        Detailed Cost Analysis
+      </Typography>
+      <Box sx={{ border: '1px solid black', p: 2 }}>
+        <DetailedCostAnalysisWidget />
+      </Box>
+    </Box>
+  </Container>
   );
 }
 

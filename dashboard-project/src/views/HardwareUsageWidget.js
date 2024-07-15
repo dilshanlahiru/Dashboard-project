@@ -1,9 +1,7 @@
-// src/components/HardwareUsageWidget.js
-
 import React, { useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
-import '../styles/HardwareUsageWidget.css';
+import { Box, MenuItem, Select, Typography, Grid, Card, CardContent } from '@mui/material';
 
 const serversData = {
     'Server 1': {
@@ -74,58 +72,66 @@ const HardwareUsageWidget = () => {
     });
 
     return (
-        <div className="hardware-usage-widget">
-            <div className="widget-header">
-                <h2>Hardware Usage</h2>
-                <select className="form-select" aria-label="Select Server" onChange={(e) => setSelectedServer(e.target.value)}>
+        <Box sx={{ padding: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
+                <Typography variant="h4">Hardware Usage</Typography>
+                <Select value={selectedServer} onChange={(e) => setSelectedServer(e.target.value)}>
                     {Object.keys(serversData).map(server => (
-                        <option key={server} value={server}>{server}</option>
+                        <MenuItem key={server} value={server}>{server}</MenuItem>
                     ))}
-                </select>
-            </div>
-            <div className="charts-container">
-                <div className="chart-item">
-                    <div className="chart-canvas">
-                        <Doughnut data={chartData(data.storage.used, data.storage.free)} options={chartOptions} />
-                    </div>
-                    <div className="chart-details">
-                        <h3>Storage</h3>
-                        <p>Used Space: {data.storage.used} TB</p>
-                        <p>Free Space: {data.storage.free} TB</p>
-                    </div>
-                </div>
-                <div className="chart-item">
-                    <div className="chart-canvas">
-                        <Doughnut data={chartData(data.vCPU.used, data.vCPU.available)} options={chartOptions} />
-                    </div>
-                    <div className="chart-details">
-                        <h3>vCPU</h3>
-                        <p>Utilized Core Count: {data.vCPU.used}</p>
-                        <p>Available Core Count: {data.vCPU.available}</p>
-                    </div>
-                </div>
-                <div className="chart-item">
-                    <div className="chart-canvas">
-                        <Doughnut data={chartData(data.ip.used, data.ip.available)} options={chartOptions} />
-                    </div>
-                    <div className="chart-details">
-                        <h3>IP</h3>
-                        <p>Used: {data.ip.used}</p>
-                        <p>Available: {data.ip.available}</p>
-                    </div>
-                </div>
-                <div className="chart-item">
-                    <div className="chart-canvas">
-                        <Doughnut data={chartData(data.ram.used, data.ram.free)} options={chartOptions} />
-                    </div>
-                    <div className="chart-details">
-                        <h3>RAM</h3>
-                        <p>Used: {data.ram.used} GB</p>
-                        <p>Free: {data.ram.free} GB</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+                </Select>
+            </Box>
+            <Grid container spacing={2} alignItems="stretch">
+                <Grid item xs={12} sm={6} md={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                                <Doughnut data={chartData(data.storage.used, data.storage.free)} options={chartOptions} />
+                            </Box>
+                            <Typography variant="h6" align="center">Storage</Typography>
+                            <Typography align="center">Used Space: {data.storage.used} TB</Typography>
+                            <Typography align="center">Free Space: {data.storage.free} TB</Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                                <Doughnut data={chartData(data.vCPU.used, data.vCPU.available)} options={chartOptions} />
+                            </Box>
+                            <Typography variant="h6" align="center">vCPU</Typography>
+                            <Typography align="center">Utilized Core Count: {data.vCPU.used}</Typography>
+                            <Typography align="center">Available Core Count: {data.vCPU.available}</Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                                <Doughnut data={chartData(data.ip.used, data.ip.available)} options={chartOptions} />
+                            </Box>
+                            <Typography variant="h6" align="center">IP</Typography>
+                            <Typography align="center">Used: {data.ip.used}</Typography>
+                            <Typography align="center">Available: {data.ip.available}</Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                                <Doughnut data={chartData(data.ram.used, data.ram.free)} options={chartOptions} />
+                            </Box>
+                            <Typography variant="h6" align="center">RAM</Typography>
+                            <Typography align="center">Used: {data.ram.used} GB</Typography>
+                            <Typography align="center">Free: {data.ram.free} GB</Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
+            </Grid>
+        </Box>
     );
 };
 
