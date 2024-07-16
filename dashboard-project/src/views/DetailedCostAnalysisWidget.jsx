@@ -21,12 +21,31 @@ const DetailedCostAnalysisWidget = () => {
     ],
   };
 
+  // Event Handlers
+  const handleLineClick = (event, elements) => {
+    if (elements.length > 0) {
+      const { index } = elements[0];
+      console.log(`Clicked on: ${lineData.labels[index]} : ${lineData.datasets[0].data[index]}`);
+      // console.log(lineData.datasets[0].data[index]);
+      alert(`Clicked on Date : ${lineData.labels[index]} Value: ${lineData.datasets[0].data[index]}`);
+    }
+  };
+
+  const handleLineHover = (event, elements) => {
+    if (elements.length > 0) {
+      const { index } = elements[0];
+      console.log(`Hovering over: ${lineData.labels[index]}`);
+    }
+  };
+
   const lineOptions = {
     scales: {
       y: {
         beginAtZero: true,
       },
     },
+    onClick: handleLineClick,
+    onHover: handleLineHover,
   };
 
   // Data for Doughnut Chart
@@ -39,6 +58,19 @@ const DetailedCostAnalysisWidget = () => {
         hoverBackgroundColor: ['#FF6384', '#36A2EB'],
       },
     ],
+  };
+
+  const handleDoughnutClick = (event, elements) => {
+    if (elements.length > 0) {
+      const { index } = elements[0];
+      console.log(`Clicked on: ${doughnutData.labels[index]}`);
+      // alert(`Clicked on: ${doughnutData.labels[index]}`);
+      alert(`Clicked on Date : ${doughnutData.labels[index]} Value: ${doughnutData.datasets[0].data[index]}`);
+    }
+  };
+
+  const doughnutOptions = {
+    onClick: handleDoughnutClick,
   };
 
   // Data for Costs by Service
@@ -78,7 +110,7 @@ const DetailedCostAnalysisWidget = () => {
               <Card className="mb-4">
                 <Card.Body>
                   <Card.Title>Costs by Resource</Card.Title>
-                  <Doughnut data={doughnutData} />
+                  <Doughnut data={doughnutData} options={doughnutOptions} />
                   <p>ASR: 12.90 USD</p>
                   <p>MNAZURUESRGROUP: 2.44 USD</p>
                 </Card.Body>

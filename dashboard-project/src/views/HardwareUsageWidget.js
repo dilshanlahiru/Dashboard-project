@@ -48,17 +48,27 @@ const serversData = {
     }
 };
 
-const chartOptions = {
+const chartOptions = (handleClick) => ({
     plugins: {
         legend: {
             display: false
         }
-    }
-};
+    },
+    onClick: handleClick
+});
 
 const HardwareUsageWidget = () => {
     const [selectedServer, setSelectedServer] = useState('Server 1');
     const data = serversData[selectedServer].resources;
+
+    const handleChartClick = (event, elements) => {
+        if (elements.length > 0) {
+            const chartElement = elements[0];
+            const label = chartElement.element.$context.raw;
+            console.log(`Clicked on: ${label}`);
+            alert(`Clicked on: ${label}`);
+        }
+    };
 
     const chartData = (used, free) => ({
         datasets: [
@@ -86,7 +96,7 @@ const HardwareUsageWidget = () => {
                     <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                                <Doughnut data={chartData(data.storage.used, data.storage.free)} options={chartOptions} />
+                                <Doughnut data={chartData(data.storage.used, data.storage.free)} options={chartOptions(handleChartClick)} />
                             </Box>
                             <Typography variant="h6" align="center">Storage</Typography>
                             <Typography align="center">Used Space: {data.storage.used} TB</Typography>
@@ -98,7 +108,7 @@ const HardwareUsageWidget = () => {
                     <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                                <Doughnut data={chartData(data.vCPU.used, data.vCPU.available)} options={chartOptions} />
+                                <Doughnut data={chartData(data.vCPU.used, data.vCPU.available)} options={chartOptions(handleChartClick)} />
                             </Box>
                             <Typography variant="h6" align="center">vCPU</Typography>
                             <Typography align="center">Utilized Core Count: {data.vCPU.used}</Typography>
@@ -110,7 +120,7 @@ const HardwareUsageWidget = () => {
                     <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                                <Doughnut data={chartData(data.ip.used, data.ip.available)} options={chartOptions} />
+                                <Doughnut data={chartData(data.ip.used, data.ip.available)} options={chartOptions(handleChartClick)} />
                             </Box>
                             <Typography variant="h6" align="center">IP</Typography>
                             <Typography align="center">Used: {data.ip.used}</Typography>
@@ -122,7 +132,7 @@ const HardwareUsageWidget = () => {
                     <Card sx={{ height: '100%' }}>
                         <CardContent>
                             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-                                <Doughnut data={chartData(data.ram.used, data.ram.free)} options={chartOptions} />
+                                <Doughnut data={chartData(data.ram.used, data.ram.free)} options={chartOptions(handleChartClick)} />
                             </Box>
                             <Typography variant="h6" align="center">RAM</Typography>
                             <Typography align="center">Used: {data.ram.used} GB</Typography>

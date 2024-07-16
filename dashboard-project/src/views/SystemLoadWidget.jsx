@@ -9,13 +9,27 @@ const SystemLoadWidget = () => {
   const cpuTemperature = 65; // Example CPU temperature value in Celsius
   const gpuTemperature = 48; // Example GPU temperature value in Celsius
 
+  // Event Handlers
+  const handleClick = (label) => {
+    console.log(`Clicked on: ${label}`);
+    alert(label);
+  };
+  // eslint-disable-next-line
+  const handleHover = (label) => {
+    console.log(`Hovering over: ${label}`);
+  };
+
   return (
     <Grid container spacing={2}>
       {/* CPU Utilization Gauge */}
       <Grid item xs={12} sm={6} md={3}>
-        <Card sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}>
+        <Card
+          sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}
+          onClick={() => handleClick('CPU Utilization is '+cpuUtilization+'%')}
+          // onMouseOver={() => handleHover('CPU Utilization')}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
+            <Typography variant="h7" gutterBottom style={{ color: 'black' }}>
               CPU Utilization
             </Typography>
             <div style={{ height: '150px' }}>
@@ -28,7 +42,7 @@ const SystemLoadWidget = () => {
                 thickness={22}
                 sx={{
                   [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 24,
+                    fontSize: 18,
                     transform: 'translate(0px, 0px)',
                     fill: '#4caf50',
                   },
@@ -42,9 +56,13 @@ const SystemLoadWidget = () => {
 
       {/* GPU Utilization Gauge */}
       <Grid item xs={12} sm={6} md={3}>
-        <Card sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}>
+        <Card
+          sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}
+          onClick={() => handleClick('GPU Utilization is '+gpuUtilization+'%')}
+          // onMouseOver={() => handleHover('GPU Utilization')}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
+            <Typography variant="h7" gutterBottom style={{ color: 'black' }}>
               GPU Utilization
             </Typography>
             <div style={{ height: '150px' }}>
@@ -57,7 +75,7 @@ const SystemLoadWidget = () => {
                 thickness={22}
                 sx={{
                   [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 24,
+                    fontSize: 18,
                     transform: 'translate(0px, 0px)',
                     fill: '#4caf50',
                   },
@@ -71,9 +89,13 @@ const SystemLoadWidget = () => {
 
       {/* CPU Temperature Gauge */}
       <Grid item xs={12} sm={6} md={3}>
-        <Card sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}>
+        <Card
+          sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}
+          onClick={() => handleClick('CPU Temperature is '+cpuTemperature+'C')}
+          // onMouseOver={() => handleHover('CPU Temperature')}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
+            <Typography variant="h7" gutterBottom style={{ color: 'black' }}>
               CPU Temperature
             </Typography>
             <div style={{ height: '150px' }}>
@@ -86,11 +108,12 @@ const SystemLoadWidget = () => {
                 thickness={22}
                 sx={{
                   [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 24,
+                    fontSize: 18,
                     transform: 'translate(0px, 0px)',
                     fill: '#4caf50',
                   },
                 }}
+                text={({ value, max }) => `${value}C`}
               />
             </div>
           </CardContent>
@@ -99,9 +122,13 @@ const SystemLoadWidget = () => {
 
       {/* GPU Temperature Gauge */}
       <Grid item xs={12} sm={6} md={3}>
-        <Card sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}>
+        <Card
+          sx={{ width: '100%', backgroundColor: '#cccccc', color: 'white' }}
+          onClick={() => handleClick('GPU Temperature is '+gpuTemperature+'C')}
+          // onMouseOver={() => handleHover('GPU Temperature')}
+        >
           <CardContent>
-            <Typography variant="h6" gutterBottom style={{ color: 'black' }}>
+            <Typography variant="h7" gutterBottom style={{ color: 'black' }}>
               GPU Temperature
             </Typography>
             <div style={{ height: '150px' }}>
@@ -114,11 +141,12 @@ const SystemLoadWidget = () => {
                 thickness={22}
                 sx={{
                   [`& .${gaugeClasses.valueText}`]: {
-                    fontSize: 24,
+                    fontSize: 18,
                     transform: 'translate(0px, 0px)',
                     fill: '#4caf50',
                   },
                 }}
+                text={({ value, max }) => `${value}C`}
               />
             </div>
           </CardContent>
