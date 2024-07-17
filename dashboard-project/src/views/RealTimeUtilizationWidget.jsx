@@ -1,30 +1,32 @@
 // src/RealTimeUtilizationWidget.js
+// eslint-disable-next-line
 import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
+// eslint-disable-next-line
 import { Card, Dropdown, DropdownButton } from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
 
-const RealTimeUtilizationWidget = () => {
-    const serverData = {
-        server1: {
-          responseTime: [100, 150, 50, 200, 250, 100, 300, 80, 220, 160, 140, 180, 120],
-          networkTraffic: [500, 450, 300, 600, 700, 500, 650, 550, 750, 800, 650, 700, 600],
-          instructionsHandled: [700, 650, 500, 800, 900, 700, 850, 750, 950, 1000, 850, 900, 800],
-        },
-        server2: {
-          responseTime: [200, 180, 220, 160, 140, 200, 120, 250, 300, 150, 170, 130, 190],
-          networkTraffic: [250, 300, 400, 350, 450, 300, 500, 370, 450, 400, 350, 500, 320],
-          instructionsHandled: [400, 450, 550, 500, 600, 450, 650, 520, 600, 550, 500, 650, 470],
-        },
-      };
+const RealTimeUtilizationWidget = ({serverData, selectedServer}) => {
+    // const serverData = {
+    //     server1: {
+    //       responseTime: [100, 150, 50, 200, 250, 100, 300, 80, 220, 160, 140, 180, 120],
+    //       networkTraffic: [500, 450, 300, 600, 700, 500, 650, 550, 750, 800, 650, 700, 600],
+    //       instructionsHandled: [700, 650, 500, 800, 900, 700, 850, 750, 950, 1000, 850, 900, 800],
+    //     },
+    //     server2: {
+    //       responseTime: [200, 180, 220, 160, 140, 200, 120, 250, 300, 150, 170, 130, 190],
+    //       networkTraffic: [250, 300, 400, 350, 450, 300, 500, 370, 450, 400, 350, 500, 320],
+    //       instructionsHandled: [400, 450, 550, 500, 600, 450, 650, 520, 600, 550, 500, 650, 470],
+    //     },
+    //   };
       
       
       
 
-  const [selectedServer, setSelectedServer] = useState('server1');
-
+  // const [selectedServer, setSelectedServer] = useState('server1');
+  // eslint-disable-next-line
   const handleSelect = (server) => {
-    setSelectedServer(server);
+    // setSelectedServer(server);
   };
 
   const createGraphData = (label, data, color) => ({
@@ -166,7 +168,7 @@ const RealTimeUtilizationWidget = () => {
     <Card style={{ width: '100%', margin: '10px' }}>
       <Card.Body>
         <Card.Title style={{ fontSize: '16px' }}>Real Time Utilization</Card.Title>
-        <DropdownButton
+        {/* <DropdownButton
           id="dropdown-basic-button"
           title={`Select Server (${selectedServer === 'server1' ? 'Server 1' : 'Server 2'})`}
           onSelect={handleSelect}
@@ -174,7 +176,7 @@ const RealTimeUtilizationWidget = () => {
         >
           <Dropdown.Item eventKey="server1">Server 1</Dropdown.Item>
           <Dropdown.Item eventKey="server2">Server 2</Dropdown.Item>
-        </DropdownButton>
+        </DropdownButton> */}
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <Typography variant="h6" align="center">Response Time</Typography>

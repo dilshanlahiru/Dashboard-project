@@ -2,32 +2,35 @@ import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Line, Doughnut } from 'react-chartjs-2';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, TimeScale, Zoom } from 'chart.js';
+import 'chartjs-adapter-date-fns';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, TimeScale, zoomPlugin);
 
-const DetailedCostAnalysisWidget = () => {
+const DetailedCostAnalysisWidget = ({lineData}) => {
   // Data for Line Chart
-  const lineData = {
-    labels: ['3/19', '3/26', '4/2', '4/9'],
-    datasets: [
-      {
-        label: 'Burn Rate',
-        data: [150, 120, 80, 50],
-        fill: true,
-        backgroundColor: 'rgba(75,192,192,0.2)',
-        borderColor: 'rgba(75,192,192,1)',
-      },
-    ],
-  };
+  // const lineData = {
+  //   labels: [
+  //     '2024-07-01T00:00', '2024-07-02T00:00', '2024-07-03T00:00', '2024-07-04T00:00',
+  //     '2024-07-05T00:00', '2024-07-06T00:00', '2024-07-07T00:00', '2024-07-08T00:00'
+  //   ],
+  //   datasets: [
+  //     {
+  //       label: 'Cost',
+  //       data: [150, 120, 110, 100, 90, 80, 70, 60],
+  //       borderColor: 'rgba(75,192,192,1)',
+  //       fill: true,
+  //     },
+  //   ],
+  // };
 
   // Event Handlers
   const handleLineClick = (event, elements) => {
     if (elements.length > 0) {
       const { index } = elements[0];
       console.log(`Clicked on: ${lineData.labels[index]} : ${lineData.datasets[0].data[index]}`);
-      // console.log(lineData.datasets[0].data[index]);
-      alert(`Clicked on Date : ${lineData.labels[index]} Value: ${lineData.datasets[0].data[index]}`);
+      alert(`Clicked on Date: ${lineData.labels[index]} Value: ${lineData.datasets[0].data[index]}`);
     }
   };
 
@@ -40,12 +43,39 @@ const DetailedCostAnalysisWidget = () => {
 
   const lineOptions = {
     scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'day',
+        },
+      },
       y: {
         beginAtZero: true,
       },
     },
     onClick: handleLineClick,
     onHover: handleLineHover,
+    plugins: {
+      zoom: {
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: 'x',
+        },
+        pan: {
+          enabled: true,
+          mode: 'x',
+        },
+        limits: {
+          x: { min: '2024-07-01T00:00', max: '2024-07-08T00:00' },
+          y: { min: 0, max: 150 },
+        },
+      },
+    },
   };
 
   // Data for Doughnut Chart
@@ -64,8 +94,7 @@ const DetailedCostAnalysisWidget = () => {
     if (elements.length > 0) {
       const { index } = elements[0];
       console.log(`Clicked on: ${doughnutData.labels[index]}`);
-      // alert(`Clicked on: ${doughnutData.labels[index]}`);
-      alert(`Clicked on Date : ${doughnutData.labels[index]} Value: ${doughnutData.datasets[0].data[index]}`);
+      alert(`Clicked on: ${doughnutData.labels[index]} Value: ${doughnutData.datasets[0].data[index]}`);
     }
   };
 
@@ -100,7 +129,7 @@ const DetailedCostAnalysisWidget = () => {
                   <Card.Title>Burn Rate</Card.Title>
                   <Line data={lineData} options={lineOptions} />
                   <p>Starting Credit: 150 USD</p>
-                  <p>Credit Remaining: 106.48 USD</p>
+                  <p>Credit Remaining: 60 USD</p>
                 </Card.Body>
               </Card>
             </Col>
