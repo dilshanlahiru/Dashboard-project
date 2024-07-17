@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { Line, Doughnut } from 'react-chartjs-2';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// eslint-disable-next-line
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend, ArcElement, TimeScale, Zoom } from 'chart.js';
 import 'chartjs-adapter-date-fns';
 import zoomPlugin from 'chartjs-plugin-zoom';
