@@ -70,6 +70,8 @@ const DetailedCostAnalysisWidget = ({ lineData }) => {
         time: {
           unit: 'day',
         },
+        min: '2024-07-22T00:00',  // Start date of the last week
+        max: '2024-07-29T00:00',  // End date of the last week
       },
       y: {
         beginAtZero: true,
@@ -93,8 +95,14 @@ const DetailedCostAnalysisWidget = ({ lineData }) => {
           mode: 'x',
         },
         limits: {
-          x: { min: '2024-07-01T00:00', max: '2024-07-08T00:00' },
-          y: { min: 0, max: 150 },
+          x: { 
+            min: '2024-07-01T00:00',  // Start date of the month
+            max: '2024-07-31T00:00'   // End date of the month
+          },
+          y: { 
+            min: 0, 
+            max: 150 
+          },
         },
       },
     },
