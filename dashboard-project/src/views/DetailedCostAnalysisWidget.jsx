@@ -140,7 +140,7 @@ const DetailedCostAnalysisWidget = ({ lineData }) => {
                 <Card.Body>
                   <Card.Title>Burn Rate</Card.Title>
                   <Line data={lineData} options={lineOptions} />
-                  <p>Starting Credit: 150 USD</p>
+                  <p>Starting Credit: 180 USD</p>
                   <p>Credit Remaining: 60 USD</p>
                 </Card.Body>
               </Card>
